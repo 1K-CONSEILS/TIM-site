@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TIM — Time Is Money · Automatisation sobre pour les TPE de services</title>
+<meta name="description" content="TIM supprime les tâches administratives sans valeur ajoutée des entreprises de services de moins de 20 salariés, avec les outils que vous payez déjà.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#F7F5F0;--surface:#FFFFFF;--ink:#15202B;--ink2:#2B3A47;--muted:#5E6A74;--line:#D9D4CA;--amber:#E3A23B;--amber-text:#8A5A0C;--tint:#F6E6C8;--gain:#2E7D5B;--alert:#B3412E;
+--sans:"IBM Plex Sans","Helvetica Neue",Arial,sans-serif;--mono:"IBM Plex Mono",Consolas,monospace;--r:6px;}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/26px var(--sans);-webkit-font-smoothing:antialiased}
+a{color:var(--amber-text)}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+.label{font:500 12px/16px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--amber-text);margin:0 0 16px}
+h1,h2,h3{margin:0;font-weight:700}
+h1{font-size:clamp(36px,6vw,58px);line-height:1.05;letter-spacing:-.01em}
+h2{font-size:clamp(28px,4vw,40px);line-height:1.15;font-weight:700}
+h3{font-size:20px;line-height:26px;font-weight:600}
+.lead{font-size:19px;line-height:30px;color:var(--ink2);max-width:640px}
+.mono{font-family:var(--mono)}
+section{padding:96px 0;border-top:1px solid var(--line)}
+/* nav */
+header.nav{position:sticky;top:0;z-index:10;background:rgba(247,245,240,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:68px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink)}
+.brand b{font-size:24px;letter-spacing:.06em}
+.brand small{font:500 10px/1 var(--mono);letter-spacing:.14em;color:var(--muted);display:block;margin-top:3px}
+.nav nav a{color:var(--ink);text-decoration:none;margin-left:28px;font-weight:500;font-size:15px}
+.nav nav a:hover{color:var(--amber-text)}
+.btn{display:inline-block;padding:14px 22px;border-radius:var(--r);font-weight:600;text-decoration:none;border:1.5px solid var(--ink);color:var(--ink);background:transparent;cursor:pointer;font-family:var(--sans);font-size:16px}
+.btn.primary{background:var(--amber);border-color:var(--amber);color:var(--ink)}
+.btn.primary:hover{background:#d4922c}
+.btn:hover{background:var(--ink);color:var(--paper)}
+.btn.primary:hover{color:var(--ink)}
+.nav .btn{padding:9px 16px;margin-left:28px}
+@media(max-width:860px){.nav nav a:not(.btn){display:none}}
+/* hero */
+.hero{padding:88px 0 96px;border:0}
+.hero-grid{display:grid;grid-template-columns:1.25fr .9fr;gap:56px;align-items:center}
+.hero h1 em{font-style:normal;color:var(--amber-text)}
+.hero .cta{display:flex;gap:16px;flex-wrap:wrap;margin-top:32px}
+.hero-card{background:var(--ink);color:var(--paper);border-radius:var(--r);padding:32px}
+.hero-card .row{display:flex;justify-content:space-between;align-items:baseline;padding:14px 0;border-bottom:1px solid #2E3B47}
+.hero-card .row:last-of-type{border:0}
+.hero-card .k{color:#9AA6B0;font-size:14px}
+.hero-card .v{font:500 26px/1 var(--mono);color:var(--amber)}
+.hero-card .foot{font:400 12px/18px var(--mono);color:#9AA6B0;margin-top:16px}
+@media(max-width:860px){.hero-grid{grid-template-columns:1fr}}
+/* grids */
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:48px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:48px;border:1px solid var(--line);border-radius:var(--r);background:var(--surface)}
+@media(max-width:900px){.g3,.g2{grid-template-columns:1fr}.g4{grid-template-columns:1fr 1fr}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:28px}
+.card p{margin:10px 0 0;color:var(--ink2)}
+.step{padding:28px;border-right:1px solid var(--line)}
+.step:last-child{border-right:0}
+.step .n{font:500 36px/1 var(--mono);color:var(--amber-text)}
+.step h3{margin:16px 0 8px}
+.step p{margin:0;color:var(--ink2);font-size:15px}
+.step .d{font:500 12px/16px var(--mono);letter-spacing:.1em;color:var(--muted);margin-top:14px;text-transform:uppercase}
+@media(max-width:900px){.step{border-right:0;border-bottom:1px solid var(--line)}}
+/* duo */
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-top:48px;border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.duo>div{padding:36px;background:var(--surface)}
+.duo>div+div{border-left:1px solid var(--line)}
+.duo .role{font:500 12px/16px var(--mono);letter-spacing:.12em;color:var(--muted);text-transform:uppercase}
+.duo h3{margin:10px 0 12px;font-size:24px;line-height:30px}
+.duo ul{margin:0;padding-left:18px;color:var(--ink2)}
+.duo li{margin:6px 0}
+.joint{background:var(--tint);padding:20px 28px;border-radius:var(--r);margin-top:24px}
+@media(max-width:900px){.duo{grid-template-columns:1fr}.duo>div+div{border-left:0;border-top:1px solid var(--line)}}
+/* tasks table */
+table{width:100%;border-collapse:collapse;margin-top:40px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+th,td{text-align:left;padding:16px 20px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:500 12px/16px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);background:var(--paper)}
+td.t{font-family:var(--mono);white-space:nowrap;color:var(--gain);font-weight:500}
+tr:last-child td{border-bottom:0}
+.note{font-size:13px;color:var(--muted);margin-top:12px}
+/* values */
+.val{border-top:2px solid var(--ink);padding-top:18px}
+.val h3{font-size:18px}
+.val p{margin:8px 0 0;color:var(--ink2);font-size:15px}
+.val .proof{margin-top:12px;font:400 13px/20px var(--mono);color:var(--muted)}
+.g5{display:grid;grid-template-columns:repeat(5,1fr);gap:28px;margin-top:48px}
+@media(max-width:1000px){.g5{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.g5{grid-template-columns:1fr}}
+/* pricing */
+.price{display:flex;flex-direction:column}
+.price .tier{font:500 12px/16px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.price .amt{font:500 36px/40px var(--mono);margin:14px 0 2px}
+.price .amt small{font-size:15px;color:var(--muted)}
+.price ul{padding-left:18px;margin:16px 0 0;color:var(--ink2);font-size:15px;flex:1}
+.price li{margin:6px 0}
+.price.feat{border:2px solid var(--ink)}
+.flag{display:inline-block;background:var(--amber);color:var(--ink);font:500 11px/1 var(--mono);letter-spacing:.1em;padding:6px 8px;border-radius:2px;margin-left:8px;vertical-align:middle}
+.ptable td.p{font-family:var(--mono);font-weight:500;white-space:nowrap}
+.promise{display:flex;gap:16px;align-items:flex-start;background:var(--ink);color:var(--paper);border-radius:var(--r);padding:24px 28px;margin-top:24px}
+.promise b{color:var(--amber)}
+/* calculator */
+.calc{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-top:40px;border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.calc .in{padding:32px;background:var(--surface)}
+.calc .out{padding:32px;background:var(--ink);color:var(--paper)}
+.field{margin-bottom:22px}
+.field label{display:flex;justify-content:space-between;font-weight:500;margin-bottom:8px}
+.field label span{font-family:var(--mono);color:var(--amber-text)}
+input[type=range]{width:100%;accent-color:var(--ink)}
+.out .big{font:500 48px/1 var(--mono);color:var(--amber);margin:8px 0 4px}
+.out .sub{color:#9AA6B0;font-size:14px}
+.out .line{display:flex;justify-content:space-between;border-top:1px solid #2E3B47;padding:12px 0;font-family:var(--mono);font-size:15px}
+@media(max-width:900px){.calc{grid-template-columns:1fr}}
+/* faq */
+details{border-bottom:1px solid var(--line);padding:20px 0}
+summary{cursor:pointer;font-weight:600;font-size:18px;list-style:none;display:flex;justify-content:space-between}
+summary::after{content:"+";font-family:var(--mono);color:var(--amber-text)}
+details[open] summary::after{content:"–"}
+details p{color:var(--ink2);margin:12px 0 0;max-width:780px}
+/* contact */
+.contact{background:var(--ink);color:var(--paper);border:0}
+.contact .label{color:var(--amber)}
+.contact .lead{color:#C9D1D8}
+form{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:32px}
+form .full{grid-column:1/-1}
+form label{display:block;font-size:14px;color:#C9D1D8;margin-bottom:6px}
+input,select,textarea{width:100%;padding:13px 14px;border-radius:2px;border:1px solid #3A4A58;background:#1C2935;color:var(--paper);font:16px var(--sans)}
+textarea{min-height:110px}
+.ok{display:none;background:var(--gain);color:#fff;padding:16px 20px;border-radius:var(--r);margin-top:16px}
+footer{background:var(--ink);color:#9AA6B0;padding:32px 0;border-top:1px solid #2E3B47;font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+@media(max-width:700px){form{grid-template-columns:1fr}th,td{padding:12px 10px;font-size:14px}td.t,td.p{white-space:normal}th,td{padding:10px 8px;font-size:13px;line-height:19px;word-break:break-word}.nav .btn{margin-left:0}section{padding:64px 0}}
+</style>
+</head>
+<body>
+
+<header class="nav"><div class="wrap">
+ <a class="brand" href="#top" aria-label="TIM, accueil">
+  <svg width="38" height="38" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="6" fill="#15202B"/><circle cx="32" cy="32" r="20" fill="#E3A23B"/><rect x="29" y="16" width="6" height="19" fill="#15202B"/><rect x="29" y="29" width="17" height="6" fill="#15202B"/><circle cx="32" cy="32" r="3.2" fill="#E3A23B"/></svg>
+  <span><b>TIM</b><small>TIME IS MONEY</small></span>
+ </a>
+ <nav><a href="#approche">Approche</a><a href="#methode">Méthode</a><a href="#tarifs">Tarifs</a><a href="#faq">Questions</a><a class="btn primary" href="#contact">Diagnostic</a></nav>
+</div></header>
+
+<main id="top">
+<section class="hero"><div class="wrap hero-grid">
+ <div>
+  <p class="label">Automatisation · TPE de services · moins de 20 salariés</p>
+  <h1>Vos équipes ne sont pas payées pour <em>recopier, relancer et classer.</em></h1>
+  <p class="lead" style="margin-top:24px">TIM supprime les tâches administratives sans valeur ajoutée de votre entreprise, avec les logiciels que vous payez déjà. Vos équipes sont formées, vous restez propriétaire de tout, et nous veillons à ce que ça tienne dans la durée.</p>
+  <div class="cta"><a class="btn primary" href="#contact">Demander un diagnostic</a><a class="btn" href="#calcul">Estimer votre temps perdu</a></div>
+ </div>
+ <div class="hero-card" aria-label="Exemple de résultat">
+  <p class="label" style="color:#E3A23B;margin-bottom:6px">Exemple · cabinet de 8 personnes</p>
+  <div class="row"><span class="k">Temps administratif répétitif</span><span class="v">87 h/mois</span></div>
+  <div class="row"><span class="k">Temps rendu après 3 mois</span><span class="v">43 h/mois</span></div>
+  <div class="row"><span class="k">Nouvel abonnement ajouté</span><span class="v">0 €</span></div>
+  <div class="row"><span class="k">Premier gain en service</span><span class="v">&lt; 30 j</span></div>
+  <p class="foot">Illustration fondée sur des hypothèses (5 personnes × 4 h/semaine, 50 % automatisé). Votre diagnostic donne vos chiffres réels.</p>
+ </div>
+</div></section>
+
+<section id="probleme"><div class="wrap">
+ <p class="label">Le constat</p>
+ <h2>Dans une petite entreprise, l'administratif ne se voit pas. Il se paie.</h2>
+ <div class="g3">
+  <div class="card"><h3>Du temps qui fuit</h3><p>Ressaisir un devis dans la facturation, relancer un impayé, renommer et classer des pièces jointes, mettre à jour un tableau de suivi : chaque tâche prend dix minutes, toutes ensemble prennent des journées.</p></div>
+  <div class="card"><h3>Des licences sous-utilisées</h3><p>Microsoft 365 ou Google Workspace, votre logiciel de facturation, votre CRM contiennent souvent déjà de quoi automatiser. Ils ne sont simplement pas configurés pour cela.</p></div>
+  <div class="card"><h3>La peur de la dépendance</h3><p>Les solutions « clés en main » empilent les abonnements et créent une boîte noire que personne ne sait faire évoluer. Quand le prestataire part, l'outil meurt.</p></div>
+ </div>
+</div></section>
+
+<section id="approche"><div class="wrap">
+ <p class="label">L'approche TIM</p>
+ <h2>Un binôme rare : la lecture d'un dirigeant, la main d'un ingénieur.</h2>
+ <p class="lead" style="margin-top:20px">L'automatisation échoue rarement pour des raisons techniques. Elle échoue parce qu'on a automatisé le mauvais processus, ou parce que l'équipe n'y a pas adhéré. TIM traite les deux.</p>
+ <div class="duo">
+  <div>
+   <p class="role">Processus · organisation · adhésion</p>
+   <h3>Le Senior Advisor</h3>
+   <ul><li>Plus de 30 ans en entreprise : direction opérationnelle, direction régionale, direction générale.</li><li>Cartographie vos processus réels, pas ceux de l'organigramme.</li><li>Priorise ce qui rapporte, arbitre avec vous, embarque vos équipes.</li></ul>
+  </div>
+  <div>
+   <p class="role">Outils · IA · sécurité</p>
+   <h3>L'ingénieur</h3>
+   <ul><li>Ingénieur sécurité & réseaux, spécialiste Python, IA et gestion des identités et des accès.</li><li>Construit des automatisations simples, documentées et testées.</li><li>Sécurise dès la conception : droits minimaux, secrets protégés, sauvegardes.</li></ul>
+  </div>
+ </div>
+ <div class="joint"><b>Notre règle :</b> d'abord les outils que vous payez déjà ; ensuite un script simple qui vous appartient ; un nouvel abonnement uniquement si le calcul le justifie, par écrit.</div>
+</div></section>
+
+<section id="methode"><div class="wrap">
+ <p class="label">La méthode</p>
+ <h2>Quatre étapes, des résultats en semaines.</h2>
+ <div class="g4">
+  <div class="step"><div class="n">01</div><h3>Diagnostiquer</h3><p>Une journée dans vos murs. Nous observons, mesurons le temps perdu et inventorions vos licences.</p><div class="d">Semaine 1–2</div></div>
+  <div class="step"><div class="n">02</div><h3>Prioriser</h3><p>Une feuille de route chiffrée : gain attendu, coût, délai, risque. Vous choisissez.</p><div class="d">Restitution</div></div>
+  <div class="step"><div class="n">03</div><h3>Construire</h3><p>Mise en service par petites livraisons, testées avec les utilisateurs. Chaque outil a sa fiche.</p><div class="d">Semaine 3–8</div></div>
+  <div class="step"><div class="n">04</div><h3>Transmettre & veiller</h3><p>Formation de l'équipe et d'un référent interne. Supervision pour que rien ne casse en silence.</p><div class="d">En continu</div></div>
+ </div>
+</div></section>
+
+<section id="exemples"><div class="wrap">
+ <p class="label">Ce que nous automatisons</p>
+ <h2>Des tâches concrètes, que vous reconnaîtrez.</h2>
+ <table>
+  <thead><tr><th>Tâche aujourd'hui</th><th>Après TIM</th><th>Gain indicatif</th></tr></thead>
+  <tbody>
+   <tr><td>Relancer à la main les factures impayées</td><td>Relances graduées envoyées seules, tableau des encours à jour chaque lundi</td><td class="t">2–4 h/mois</td></tr>
+   <tr><td>Ressaisir le devis accepté dans la facturation</td><td>Devis signé → facture préparée → validation en un clic</td><td class="t">3–6 h/mois</td></tr>
+   <tr><td>Trier et renommer les pièces jointes reçues</td><td>Classement automatique dans le bon dossier client, nommage normalisé</td><td class="t">2–5 h/mois</td></tr>
+   <tr><td>Préparer les éléments pour l'expert-comptable</td><td>Justificatifs collectés et transmis au fil de l'eau</td><td class="t">3–8 h/mois</td></tr>
+   <tr><td>Répondre aux mêmes questions clients</td><td>Assistant de réponse s'appuyant sur vos documents, validé par un humain</td><td class="t">4–10 h/mois</td></tr>
+   <tr><td>Créer les accès d'un nouvel arrivant</td><td>Comptes, droits et dossiers créés en une procédure — et retirés à son départ</td><td class="t">1–2 h/arrivée</td></tr>
+  </tbody>
+ </table>
+ <p class="note">Ordres de grandeur indicatifs, très variables selon les volumes. Le diagnostic les mesure dans votre entreprise avant tout engagement.</p>
+</div></section>
+
+<section id="calcul"><div class="wrap">
+ <p class="label">Estimation</p>
+ <h2>Combien vous coûte l'administratif répétitif ?</h2>
+ <div class="calc">
+  <div class="in">
+   <div class="field"><label for="p">Personnes concernées <span id="pv">5</span></label><input id="p" type="range" min="1" max="19" value="5"></div>
+   <div class="field"><label for="h">Heures de tâches répétitives par personne et par semaine <span id="hv">4</span></label><input id="h" type="range" min="1" max="15" value="4"></div>
+   <div class="field"><label for="c">Coût horaire chargé moyen (€) <span id="cv">35</span></label><input id="c" type="range" min="20" max="90" step="5" value="35"></div>
+   <div class="field" style="margin:0"><label for="a">Part automatisable (hypothèse) <span id="av">50 %</span></label><input id="a" type="range" min="20" max="70" step="5" value="50"></div>
+  </div>
+  <div class="out">
+   <p class="sub">Temps récupérable estimé</p>
+   <div class="big" id="hours">43 h</div>
+   <p class="sub">par mois</p>
+   <div class="line" style="margin-top:20px"><span>Coût actuel des tâches</span><span id="cost">3 033 €/mois</span></div>
+   <div class="line"><span>Valeur du temps rendu</span><span id="gain" style="color:#5FB98E">1 517 €/mois</span></div>
+   <div class="line"><span>Pack Démarrage remboursé en</span><span id="roi">≈ 3,7 mois</span></div>
+   <p class="sub" style="margin-top:12px;font-size:12px;line-height:18px">Simulation indicative : 52 semaines / 12 mois ; retour calculé sur le Pack Démarrage (4 900 € HT) et la formule Sérénité (189 € HT/mois). Le temps rendu n'est un gain financier que s'il est réaffecté à une activité utile.</p>
+  </div>
+ </div>
+</div></section>
+
+<section id="valeurs"><div class="wrap">
+ <p class="label">Nos engagements</p>
+ <h2>Cinq valeurs, cinq preuves.</h2>
+ <div class="g5">
+  <div class="val"><h3>Transparence</h3><p>Vous voyez tout ce que nous faisons, et ce que ça coûte.</p><p class="proof">Prix publiés. Coûts tiers refacturés au réel, sans marge.</p></div>
+  <div class="val"><h3>Autonomie</h3><p>Notre réussite : que vous puissiez vous passer de nous au quotidien.</p><p class="proof">Un référent interne formé. Code, accès et documentation remis.</p></div>
+  <div class="val"><h3>Sobriété</h3><p>Le bon outil est souvent celui que vous avez déjà.</p><p class="proof">Audit de vos licences avant toute recommandation.</p></div>
+  <div class="val"><h3>Solidité</h3><p>Une automatisation qui casse coûte plus cher que la tâche manuelle.</p><p class="proof">Sécurité dès la conception, tests, supervision.</p></div>
+  <div class="val"><h3>Efficacité</h3><p>Des résultats visibles vite, mesurés en heures rendues.</p><p class="proof">Premier gain en service en moins de 30 jours.</p></div>
+ </div>
+</div></section>
+
+<section id="tarifs"><div class="wrap">
+ <p class="label">Tarifs publics · prix HT</p>
+ <h2>Des prix affichés, des forfaits fermes.</h2>
+ <p class="lead" style="margin-top:20px">Pas de régie à durée indéterminée. Chaque étape a son prix, connu avant de commencer.</p>
+ <div class="g3">
+  <div class="card price"><span class="tier">1 · Comprendre</span><h3 style="margin-top:10px">Diagnostic Flash</h3><div class="amt">1 490 €</div><ul><li>1 journée d'immersion dans vos équipes</li><li>Cartographie des processus clés</li><li>Inventaire de vos licences et outils</li><li>Top 10 des tâches à automatiser, chiffrées</li><li>Feuille de route remise sous 7 jours</li></ul></div>
+  <div class="card price feat"><span class="tier">2 · Démarrer <span class="flag">LE PLUS CHOISI</span></span><h3 style="margin-top:10px">Pack Démarrage</h3><div class="amt">4 900 €</div><ul><li>Diagnostic Flash inclus</li><li>2 automatisations Essentielles + 1 Avancée</li><li>Atelier équipe (½ journée)</li><li>Parcours référent interne</li><li>3 mois de formule Veille offerts</li></ul></div>
+  <div class="card price"><span class="tier">3 · Durer</span><h3 style="margin-top:10px">Continuité de service</h3><div class="amt">dès 79 € <small>/mois</small></div><ul><li>Supervision automatique et alertes</li><li>Correctifs et mises à jour</li><li>Heures d'évolution incluses selon la formule</li><li>Rapport et revue avec le dirigeant</li><li>Sans engagement après 3 mois</li></ul></div>
+ </div>
+ <div class="promise"><svg width="28" height="28" viewBox="0 0 64 64" aria-hidden="true" style="flex:none"><circle cx="32" cy="32" r="28" fill="#E3A23B"/><rect x="29" y="12" width="6" height="23" fill="#15202B"/><rect x="29" y="29" width="21" height="6" fill="#15202B"/></svg><p style="margin:0"><b>Garantie diagnostic.</b> Si le diagnostic n'identifie pas au moins 10 heures par mois récupérables dans votre entreprise, il ne vous est pas facturé. S'il est suivi d'une mise en place dans les deux mois, son montant est déduit.</p></div>
+ <table class="ptable">
+  <thead><tr><th>Prestation à l'unité</th><th>Exemple</th><th>Prix HT</th></tr></thead>
+  <tbody>
+   <tr><td><b>Automatisation Essentielle</b><br><span class="note">1 outil, 1 flux</span></td><td>Relances automatiques, classement des pièces jointes</td><td class="p">690 €</td></tr>
+   <tr><td><b>Automatisation Avancée</b><br><span class="note">plusieurs outils reliés</span></td><td>Devis signé → facture → relance → tableau de bord</td><td class="p">1 690 €</td></tr>
+   <tr><td><b>Sur mesure</b><br><span class="note">forfait ferme sur devis</span></td><td>Petite application métier, assistant IA sur vos documents</td><td class="p">dès 3 900 €</td></tr>
+   <tr><td><b>Atelier équipe</b><br><span class="note">½ journée, jusqu'à 8 personnes</span></td><td>Prise en main des outils livrés</td><td class="p">590 €</td></tr>
+   <tr><td><b>Parcours référent interne</b><br><span class="note">2 × ½ journée + 1 mois de suivi</span></td><td>Savoir modifier et dépanner les flux</td><td class="p">1 190 €</td></tr>
+   <tr><td><b>Veille</b> · jusqu'à 5 automatisations</td><td>Supervision, alertes, correctifs urgents, rapport trimestriel</td><td class="p">79 €/mois</td></tr>
+   <tr><td><b>Sérénité</b> · jusqu'à 15 automatisations</td><td>+ correctifs et mises à jour, 2 h d'évolution/mois, réponse sous 1 jour ouvré</td><td class="p">189 €/mois</td></tr>
+   <tr><td><b>Partenaire</b> · sans plafond raisonnable</td><td>+ 5 h d'évolution/mois, revue trimestrielle, veille licences, réponse sous 4 h ouvrées</td><td class="p">389 €/mois</td></tr>
+   <tr><td><b>Hors forfait</b></td><td>Intervention ponctuelle, décomptée au quart d'heure</td><td class="p">95 €/h</td></tr>
+  </tbody>
+ </table>
+ <p class="note">Coûts tiers éventuels (appels d'API d'IA, hébergement) refacturés au réel, sans marge, et estimés avant chaque mise en place — souvent quelques euros par mois. Règlement : 40 % à la commande, 60 % à la mise en service.</p>
+</div></section>
+
+<section id="faq"><div class="wrap">
+ <p class="label">Questions fréquentes</p>
+ <h2>Ce qu'on nous demande avant de commencer.</h2>
+ <div style="margin-top:32px">
+  <details><summary>Faut-il acheter de nouveaux logiciels ?</summary><p>Dans la plupart des cas, non. Nous partons de ce que vous payez déjà (suite bureautique, facturation, CRM, banque). Un nouvel outil n'est proposé que si le gain le justifie, avec un calcul écrit que vous validez.</p></details>
+  <details><summary>Que se passe-t-il si vous arrêtez votre activité ou si nous arrêtons de travailler ensemble ?</summary><p>Vous êtes propriétaire de tout : code, comptes, documentation. Votre référent interne est formé pour faire fonctionner les outils. Chaque automatisation dispose d'une fiche « que faire si ça s'arrête ». Un autre prestataire peut reprendre sans repartir de zéro.</p></details>
+  <details><summary>Et la sécurité de nos données ?</summary><p>C'est le métier d'origine de notre ingénieur. Chaque outil n'accède qu'aux données strictement nécessaires, les mots de passe et clés sont stockés de façon sécurisée, et nous privilégions les traitements dans vos propres environnements. Les usages d'IA sont choisis en tenant compte de la confidentialité de vos données et du RGPD.</p></details>
+  <details><summary>Nos équipes ne sont pas « techniques ». Est-ce un problème ?</summary><p>C'est notre point de départ. Nous construisons avec les utilisateurs, nous livrons par petites étapes et nous formons. Un outil que l'équipe n'utilise pas est un échec, quel que soit sa qualité technique.</p></details>
+  <details><summary>Combien de temps cela prend-il de votre côté ?</summary><p>Une journée d'immersion pour le diagnostic, puis environ une heure par semaine pour le dirigeant ou le référent pendant la mise en place. Votre implication comme dirigeant est la première condition de réussite : nous vous la demanderons explicitement.</p></details>
+ </div>
+</div></section>
+
+<section id="contact" class="contact"><div class="wrap">
+ <p class="label">Contact</p>
+ <h2>Parlons de vos 10 tâches les plus pénibles.</h2>
+ <p class="lead" style="margin-top:16px">Un premier échange de 30 minutes, sans engagement, pour savoir si un diagnostic a du sens pour vous.</p>
+ <form id="f" novalidate>
+  <div><label for="n">Nom</label><input id="n" required></div>
+  <div><label for="e">E-mail</label><input id="e" type="email" required></div>
+  <div><label for="s">Entreprise</label><input id="s"></div>
+  <div><label for="t">Effectif</label><select id="t"><option>1 à 5</option><option>6 à 10</option><option>11 à 19</option><option>20 et plus</option></select></div>
+  <div class="full"><label for="m">La tâche qui vous fait perdre le plus de temps</label><textarea id="m"></textarea></div>
+  <div class="full"><button class="btn primary" type="submit">Envoyer ma demande</button></div>
+ </form>
+ <div class="ok" id="ok">Merci. Version de démonstration : le formulaire n'est pas encore relié à une messagerie. Écrivez-nous en attendant à <b>contact@[votre-domaine].fr</b>.</div>
+</div></section>
+</main>
+
+<footer><div class="wrap"><span>TIM — Time Is Money · Le temps rendu à l'essentiel.</span><span>Mentions légales · Politique de confidentialité · [SIREN à compléter]</span></div></footer>
+
+<script>
+(function(){
+ var $=function(i){return document.getElementById(i)};
+ var fmt=function(n){return Math.round(n).toLocaleString('fr-FR')};
+ function calc(){
+  var p=+$('p').value,h=+$('h').value,c=+$('c').value,a=+$('a').value/100;
+  $('pv').textContent=p;$('hv').textContent=h;$('cv').textContent=c;$('av').textContent=Math.round(a*100)+' %';
+  var hm=p*h*52/12, cost=hm*c, rh=hm*a, g=rh*c, net=g-189;
+  $('hours').textContent=fmt(rh)+' h';
+  $('cost').textContent=fmt(cost)+' €/mois';
+  $('gain').textContent=fmt(g)+' €/mois';
+  $('roi').textContent= net>0 ? '≈ '+(4900/net).toLocaleString('fr-FR',{maximumFractionDigits:1})+' mois' : 'non rentable à ce niveau';
+ }
+ ['p','h','c','a'].forEach(function(i){$(i).addEventListener('input',calc)});calc();
+ $('f').addEventListener('submit',function(e){e.preventDefault();$('ok').style.display='block';});
+})();
+</script>
+</body>
+</html>
