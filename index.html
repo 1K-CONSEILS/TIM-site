@@ -297,14 +297,16 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
  <h2>Parlons de vos 10 tâches les plus pénibles.</h2>
  <p class="lead" style="margin-top:16px">Un premier échange de 30 minutes, sans engagement, pour savoir si un diagnostic a du sens pour vous.</p>
  <form id="f" novalidate>
-  <div><label for="n">Nom</label><input id="n" required></div>
-  <div><label for="e">E-mail</label><input id="e" type="email" required></div>
-  <div><label for="s">Entreprise</label><input id="s"></div>
-  <div><label for="t">Effectif</label><select id="t"><option>1 à 5</option><option>6 à 10</option><option>11 à 19</option><option>20 et plus</option></select></div>
-  <div class="full"><label for="m">La tâche qui vous fait perdre le plus de temps</label><textarea id="m"></textarea></div>
+  <div><label for="n">Nom</label><input id="n" name="Nom" required></div>
+  <div><label for="e">E-mail</label><input id="e" name="email" type="email" required></div>
+  <div><label for="s">Entreprise</label><input id="s" name="Entreprise"></div>
+  <div><label for="t">Effectif</label><select id="t" name="Effectif"><option>1 à 5</option><option>6 à 10</option><option>11 à 19</option><option>20 et plus</option></select></div>
+  <div class="full"><label for="m">La tâche qui vous fait perdre le plus de temps</label><textarea id="m" name="Message"></textarea></div>
+  <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
   <div class="full"><button class="btn primary" type="submit">Envoyer ma demande</button></div>
  </form>
- <div class="ok" id="ok">Merci. Version de démonstration : le formulaire n'est pas encore relié à une messagerie. Écrivez-nous en attendant à <b>contact@[votre-domaine].fr</b>.</div>
+ <div class="ok" id="ok">Merci, votre demande est bien envoyée. Nous revenons vers vous très vite.</div>
+ <div class="ok" id="ko" style="background:var(--alert)">L'envoi n'a pas abouti. Écrivez-nous directement à <a href="mailto:contact@time-is-money.fr" style="color:#fff"><b>contact@time-is-money.fr</b></a>.</div>
 </div></section>
 </main>
 
@@ -324,7 +326,17 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
   $('roi').textContent= net>0 ? '≈ '+(4900/net).toLocaleString('fr-FR',{maximumFractionDigits:1})+' mois' : 'non rentable à ce niveau';
  }
  ['p','h','c','a'].forEach(function(i){$(i).addEventListener('input',calc)});calc();
- $('f').addEventListener('submit',function(e){e.preventDefault();$('ok').style.display='block';});
+ $('f').addEventListener('submit',function(e){
+  e.preventDefault();var f=this,b=f.querySelector('button');
+  if(!f.reportValidity())return;
+  b.disabled=true;b.textContent='Envoi…';$('ko').style.display='none';
+  var d=new FormData(f);d.append('_subject','Nouvelle demande de contact — site TIM');d.append('_template','table');
+  fetch('https://formsubmit.co/ajax/contact@time-is-money.fr',{method:'POST',headers:{Accept:'application/json'},body:d})
+   .then(function(r){return r.json()}).then(function(j){
+    if(String(j.success)!=='true')throw 0;
+    f.style.display='none';$('ok').style.display='block';
+   }).catch(function(){$('ko').style.display='block';b.disabled=false;b.textContent='Envoyer ma demande';});
+ });
 })();
 </script>
 </body>
